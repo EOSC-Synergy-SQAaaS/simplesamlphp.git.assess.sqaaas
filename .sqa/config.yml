@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/simplesamlphp/simplesamlphp:
+      branch: master
+      repo: https://github.com/simplesamlphp/simplesamlphp.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/simplesamlphp/simplesamlphp git:
+        commands:
+        - /usr/bin/env sh .sqa/script.leaky-sangria-tarantula.sh
+        container: qc.acc_cranky-lavender-chin
+  QC.Doc:
+    repos:
+      github.com/simplesamlphp/simplesamlphp find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.silly-violet-collie.sh
+        container: qc.doc_tacky-amber-fox
+      github.com/simplesamlphp/simplesamlphp git:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-goldenrod-insect.sh
+        container: qc.doc_wiggy-olive-russel
+      github.com/simplesamlphp/simplesamlphp markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-coral-burmese.sh
+        container: qc.doc_beady-coral-fousek
+  QC.Lic:
+    repos:
+      github.com/simplesamlphp/simplesamlphp licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-cinnamon-mouse.sh
+        container: qc.lic_snippy-salmon-schnauzer
+  QC.Sec:
+    repos:
+      github.com/simplesamlphp/simplesamlphp bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-gamboge-dollar.sh
+        container: qc.sec_hazy-viridian-macaw
+  QC.Sty:
+    repos:
+      github.com/simplesamlphp/simplesamlphp flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-blue-bandicoot.sh
+        container: qc.sty_sickly-heliotrope-octopus
+      github.com/simplesamlphp/simplesamlphp jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.grumpy-orchid-spitz.sh
+        container: qc.sty_blurry-ultramarine-spaniel
+  QC.Ver:
+    repos:
+      github.com/simplesamlphp/simplesamlphp get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-chartreuse-dodo.sh
+        container: qc.ver_snippy-razzmatazz-newfoundland
+timeout: 5400
